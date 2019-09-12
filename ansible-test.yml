@@ -8,7 +8,9 @@
   - name: install pip2
     apt:
       name: python-pip
-      
+      update_cache: yes
+      state: present
+
   - name: install pip docker-py
     pip: 
       - docker-py
