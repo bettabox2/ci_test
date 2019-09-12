@@ -1,12 +1,7 @@
 #!groovy
 properties([
-<<<<<<< HEAD
     disableConcurrentBuilds(),
     buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5')),
-=======
-    disableConcurrentBuilds()
-   # buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5')),
->>>>>>> bf5e2ff7608032ab1f9fcf362720b1fcce9acdc3
     pipelineTriggers([cron('* * * * *')]),
 ])
 pipeline {
