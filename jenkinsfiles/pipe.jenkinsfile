@@ -1,0 +1,23 @@
+#!groovy
+properties([
+    disableConcurrentBuilds(),
+    buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5')),
+    pipelineTriggers([cron('* * * * *')])
+])
+pipeline {
+    agent { 
+        label 'master'
+        }
+    stages {
+        stage("test ls -lah") {
+            steps {
+                sh 'ls -lah'
+            }
+        }
+        stage("build docker image" ) {
+            steps {
+                sh 'ansible-playbook ansible-test.yml'
+            }
+        }
+        }       
+    }

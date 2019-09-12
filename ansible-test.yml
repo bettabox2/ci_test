@@ -1,0 +1,64 @@
+- name: testing docker image
+  hosts: local
+
+  vars:
+   jenkins_home: jenkins_home
+
+  tasks:
+  - name: Build image 
+    docker_image:
+      name: 7757/jenkins:latest
+      build:
+        path: ./
+    source: build
+  
+  - name: create jenkins_home dir
+    file:
+      path: ./{{ jenkins_home }}
+      state: directory
+      mode: '0777'
+
+  - name: application container
+    docker:
+      name: myapplication
+      image: someuser/appimage
+      state: reloaded
+      pull: always
+      devices:
+      - "{{ jenkins_home }}:/var/jenkins_home"
+      ports:
+      - "8000:8080"
+      - "5000:5000"
+    ignore_errors: True
+
+  - name: waiting for start container
+    wait_for:
+      port: 8000
+      delay: 4
+      timeout: 60
+    ignore_errors: True
+
+  - name: curl test
+    uri:
+      uri: localhost:8000
+      return_content: yes
+    ignore_errors: True
+    register: result
+
+  - name: block for stop and rm img
+    block:
+
+    - name: force rm img 
+      docker_image: 
+        name: 7757/jenkins
+        tag: latest
+        force: absent
+
+    - name: rm dir
+      file:
+        path: ./{{ jenkins_home }}
+        state: absent
+  
+  - name: Stop playbook when fail
+    fail: msg="fail in test"
+    when: result|failed
