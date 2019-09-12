@@ -1,5 +1,5 @@
 - name: testing docker image
-  hosts: local
+  hosts: localhost
 
   vars:
    jenkins_home: jenkins_home
