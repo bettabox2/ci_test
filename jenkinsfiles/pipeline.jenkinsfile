@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage("test ls -lah") {
             steps {
-                sh 'sl -lah'
+                sh 'ls -lah'
             }
         }
         stage("build docker image" ) {
