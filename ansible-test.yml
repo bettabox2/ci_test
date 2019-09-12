@@ -18,12 +18,11 @@
       state: directory
       mode: '0777'
 
-  - name: application container
+  - name: run container
     docker:
-      name: myapplication
-      image: someuser/appimage
+      name: jenkins
+      image: 7757/jenkins:latest
       state: reloaded
-      pull: always
       devices:
       - "{{ jenkins_home }}:/var/jenkins_home"
       ports:
@@ -52,7 +51,8 @@
       docker_image: 
         name: 7757/jenkins
         tag: latest
-        force: absent
+        state: absent
+        force: on
 
     - name: rm dir
       file:
