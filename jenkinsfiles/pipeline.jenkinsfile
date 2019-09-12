@@ -21,7 +21,7 @@ pipeline {
         }
         stage("run image") {
             steps {
-                sh 'docker run --name jenkins  -p 8000:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -d 7757/jenkins:latest'
+                sh 'docker run -p 8000:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -d 7757/jenkins:latest'
                 }
             }
         stage("for wait") {
