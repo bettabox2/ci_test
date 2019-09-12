@@ -7,10 +7,10 @@
   tasks:
   - name: Build image 
     docker_image:
-      name: 7757/jenkins:latest
-      build:
-        dockerfile: ./
-    source: build
+      name: 7757/jenkins
+      tag: latest
+      path: ./
+      state: build
   
   - name: create jenkins_home dir
     file:
