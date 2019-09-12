@@ -26,14 +26,14 @@
       devices:
       - "{{ jenkins_home }}:/var/jenkins_home"
       ports:
-      - "8000:8080"
+      - "8080:8000"
       - "5000:5000"
     ignore_errors: True
 
   - name: waiting for start container
     wait_for:
       port: 8000
-      delay: 20
+      delay: 10
       timeout: 120
     ignore_errors: True
     register: result
