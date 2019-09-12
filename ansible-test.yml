@@ -9,7 +9,8 @@
     docker_image:
       name: 7757/jenkins:latest
       build:
-        path: ./
+        dockerfile: ./
+    source: build
   
   - name: create jenkins_home dir
     file:
