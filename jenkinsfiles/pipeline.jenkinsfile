@@ -16,12 +16,12 @@ pipeline {
         }
         stage("build docker image" ) {
             steps {
-                sh 'docker build ../ -t 7757/jenkins:$(cat ../version)'
+                sh 'docker build ../ -t 7757/jenkins:latest'
             }
         }
         stage("run image") {
             steps {
-                sh 'mkdir jenkins_home && chmod 777 jenkins_home &&  docker run --name jenkins_$(cat ../version)  -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -d 7757/jenkins:$(cat ../version)'
+                sh 'mkdir jenkins_home && chmod 777 jenkins_home &&  docker run --name jenkins  -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -d 7757/jenkins:latest'
                 }
             }
         stage("for wait") {
@@ -31,7 +31,7 @@ pipeline {
         }
         stage("stop image") {
             steps {
-                sh 'docker stop jenkins_$(cat ../version)'
+                sh 'docker stop jenkins'
                 }
             }
         }       
