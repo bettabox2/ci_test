@@ -6,6 +6,7 @@
 
   tasks:
   - name: install pip2
+    become: yes
     apt:
       name: python-pip
       update_cache: yes
