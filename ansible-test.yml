@@ -5,17 +5,6 @@
    jenkins_home: jenkins_home
 
   tasks:
-  - name: install pip2
-    become: yes
-    apt:
-      name: python-pip
-      update_cache: yes
-      state: present
-
-  - name: install pip docker-py
-    pip: 
-      - docker-py
-
   - name: Build image 
     docker_image:
       name: 7757/jenkins
