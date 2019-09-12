@@ -19,10 +19,10 @@
       mode: '0777'
 
   - name: run container
-    docker:
+    docker_container:
       name: jenkins
       image: 7757/jenkins:latest
-      state: reloaded
+      state: present
       devices:
       - "{{ jenkins_home }}:/var/jenkins_home"
       ports:
