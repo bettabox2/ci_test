@@ -34,7 +34,7 @@
     wait_for:
       port: 8000
       delay: 20
-      timeout: 60
+      timeout: 120
     ignore_errors: True
     register: result
 
