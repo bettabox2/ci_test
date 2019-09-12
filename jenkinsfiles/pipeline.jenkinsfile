@@ -18,6 +18,7 @@ pipeline {
             steps {
                 sh 'docker build ../ -t 7757/jenkins:$(cat ../version)'
             }
+        }
         stage("run image") {
             steps {
                 sh 'mkdir jenkins_home && chmod 777 jenkins_home &&  docker run --name jenkins_$(cat ../version)  -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -d 7757/jenkins:$(cat ../version)'
@@ -35,4 +36,3 @@ pipeline {
             }
         }       
     }
-}
